@@ -231,8 +231,9 @@ cards:
                       }
                     }
 
-                    @media (min-aspect-ratio: 1.8/1) and (max-aspect-ratio: 2/1)
-                    and (max-width: 2000px){
+                    @media (min-aspect-ratio: 1.001/1) and (max-aspect-ratio:
+                    1000/1) and (max-width: 2300px), (min-aspect-ratio: 2.1/1) {
+
                       ha-card {
                       margin: 0px {{space|default(0)}}px 0px  ;
                       }
@@ -279,169 +280,13 @@ cards:
                       margin: 20px {{space|default(150)}}px 20px  ;
                     }
 
-                    @media (min-aspect-ratio: 1.8/1) and (max-aspect-ratio: 2/1)
-                    and (max-width: 2000px){
+                    @media (min-aspect-ratio: 1.001/1) and (max-aspect-ratio:
+                    1000/1) and (max-width: 2300px), (min-aspect-ratio: 2.1/1) {
+
                       ha-card {
                       margin: 20px {{space|default(0)}}px 20px  ;
                       }
                     }
-          - type: custom:mushroom-chips-card
-            chips:
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: light.embi_lampa
-                    state: "on"
-                chip:
-                  type: template
-                  entity: sensor.appletv_app
-                  tap_action:
-                    action: perform-action
-                    perform_action: light.turn_on
-                    target:
-                      entity_id: light.embi_lampa
-                    data:
-                      effect: Огонь
-                  icon: mdi:fire
-                  icon_color: "1"
-                  hold_action:
-                    action: none
-                  double_tap_action:
-                    action: none
-                  card_mod:
-                    style:
-                      .: |
-                        {% set hover = 'true' %}
-                        {% set stating = 'false' %}
-                        {% include 'chip_settings_style.jinja' %}
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: light.embi_lampa
-                    state: "on"
-                chip:
-                  type: template
-                  tap_action:
-                    action: perform-action
-                    perform_action: light.turn_on
-                    target:
-                      entity_id: light.embi_lampa
-                    data:
-                      effect: Лава лампа
-                  icon: mdi:lava-lamp
-                  icon_color: "1"
-                  hold_action:
-                    action: none
-                  double_tap_action:
-                    action: none
-                  card_mod:
-                    style:
-                      .: |
-                        {% set hover = 'true' %}
-                        {% set stating = 'false' %}
-                        {% include 'chip_settings_style.jinja' %}
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: light.embi_lampa
-                    state: "on"
-                chip:
-                  type: template
-                  tap_action:
-                    action: perform-action
-                    perform_action: light.turn_on
-                    target:
-                      entity_id: light.embi_lampa
-                    data:
-                      effect: Северное Сияние
-                  icon: mdi:blur
-                  icon_color: "1"
-                  hold_action:
-                    action: none
-                  double_tap_action:
-                    action: none
-                  card_mod:
-                    style:
-                      .: |
-                        {% set hover = 'true' %}
-                        {% set stating = 'false' %}
-                        {% include 'chip_settings_style.jinja' %}
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: light.embi_lampa
-                    state: "on"
-                chip:
-                  type: template
-                  tap_action:
-                    action: perform-action
-                    perform_action: light.turn_on
-                    target:
-                      entity_id: light.embi_lampa
-                    data:
-                      effect: Романтика
-                  icon: mdi:emoticon-kiss-outline
-                  icon_color: "1"
-                  hold_action:
-                    action: none
-                  double_tap_action:
-                    action: none
-                  card_mod:
-                    style:
-                      .: |
-                        {% set hover = 'true' %}
-                        {% set stating = 'false' %}
-                        {% include 'chip_settings_style.jinja' %}
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: light.embi_lampa
-                    state: "on"
-                chip:
-                  type: template
-                  tap_action:
-                    action: perform-action
-                    perform_action: light.turn_on
-                    target:
-                      entity_id: light.embi_lampa
-                    data:
-                      effect: Радуга
-                  icon: mdi:looks
-                  icon_color: "1"
-                  hold_action:
-                    action: none
-                  double_tap_action:
-                    action: none
-                  card_mod:
-                    style:
-                      .: |
-                        {% set hover = 'true' %}
-                        {% set stating = 'false' %}
-                        {% include 'chip_settings_style.jinja' %}
-              - type: template
-                tap_action:
-                  action: navigate
-                  navigation_path: "#ambi"
-                icon: mdi:dots-horizontal
-                icon_color: "1"
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-                card_mod:
-                  style:
-                    .: |
-                      {% set hover = 'true' %}
-                      {% set stating = 'false' %}
-                      {% include 'chip_settings_style.jinja' %}
-            alignment: center
-            layout_options:
-              grid_columns: full
-            card_mod:
-              style:
-                .: |
-
-                  {% include 'chip_buttons_small.jinja' %}
         grid_options:
           columns: 24
           rows: auto
@@ -484,7 +329,7 @@ cards:
       cards:
         - type: heading
           icon: cil:apple-homepod
-          heading: 0.3.6
+          heading: 0.3.6-2
           heading_style: title
           card_mod:
             style: |
@@ -501,8 +346,8 @@ cards:
         hash: "#ambi"
         name: Эмби Лампа
         icon: hue:bollard
-        margin_top_mobile: calc(100vh - 880px)
-        margin_top_desktop: calc(100vh - 830px)
+        margin_top_mobile: calc(100vh - 980px)
+        margin_top_desktop: calc(100vh - 930px)
         tap_action:
           action: none
         double_tap_action:
@@ -549,6 +394,557 @@ cards:
                 --chip-font-size: 0.6em;
               }
               }
+      - type: custom:bubble-card
+        card_type: separator
+        styles: |
+          .bubble-line {
+            background: var(--primary-text-color);
+            opacity: 0.1;
+          }
+        name: Белый
+        icon: mdi:thermometer
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            icon: ""
+            content: ""
+            icon_color: ""
+            card_mod:
+              style: |
+                ha-card {
+                  weight: 2%;
+                  --chip-background: transparent !important;
+                  --chip-border-width: 0px;
+                  --chip-height: 9px;
+                }
+          - type: template
+            icon: mdi:circle
+            icon_color: 247,176,91
+            content: Мягкий белый
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Мягкий белый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {}
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 247,199,134
+            content: Тёплый белый
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Теплый белый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {}
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 251,223,186
+            content: Белый
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Белый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {}
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 250,213,156
+            content: Дневной белый
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Дневной белый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {}
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 216,219,225
+            content: Холодный белый
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Холодный белый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+          - type: template
+            icon: ""
+            content: ""
+            icon_color: ""
+            card_mod:
+              style: |
+                ha-card {
+                  weight: 10%;
+                  --chip-background: transparent !important;
+                  --chip-border-width: 0px;
+                  --chip-height: 10px;
+                }
+        alignment: start
+        card_mod:
+          style: |
+            ha-card {
+              opacity:100%;
+              --chip-border-radius: 50px;
+              --chip-border-width: {{states('input_number.s_card_border_width')|int(0)}}px  !important;
+              --chip-border-color: var(--ha-card-border-color, rgba(var(--rgb-primary-text-color),0.1)) !important;
+              }
+            ha-card:hover {
+               opacity: 100%; }
+            ha-card > .chip-container {
+              flex-wrap: nowrap;
+              overflow-x: scroll;
+              overflow-y: hidden;
+              --chip-spacing: 10px;
+              --chip-height: 45px;
+              --chip-background: rgba(var(--rgb-primary-text-color), 0.05);
+              --chip-font-weight: bolder; 
+              margin-top: 5px;
+              margin-left: -17px;  
+              margin-right: -20px;
+              margin-bottom: 0px; 
+              padding-bottom: 10px;
+              scrollbar-width: none; /* Firefox */
+              -ms-overflow-style: none; /* IE и Edge */
+            }
+            ha-card > .chip-container > * {
+              flex-shrink: 0;
+            }
+      - type: custom:bubble-card
+        card_type: separator
+        styles: |
+          .bubble-line {
+            background: var(--primary-text-color);
+            opacity: 0.1;
+          }
+        name: Цвета
+        icon: mdi:palette
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            icon: ""
+            content: ""
+            icon_color: ""
+            card_mod:
+              style: |
+                ha-card {
+                  weight: 2%;
+                  --chip-background: transparent !important;
+                  --chip-border-width: 0px;
+                  --chip-height: 9px;
+                }
+          - type: template
+            icon: mdi:circle
+            icon_color: 241,101,92
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Красный
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 243,139,118
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Коралловый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 255,154,0
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Оранжевый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 2249,194,86
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Желтый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 211,248,50
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Салатовый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 147,248,121
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Зеленый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 114,249,188
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Изумрудный
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 112,251,254
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Бирюзовый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 102,229,255
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Голубой
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 115,150,255
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Синий
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 230,233,255
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Лунный
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 150,115,255
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Сиреневый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 185,115,255
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Фиолетовый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 255,77,255
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Пурпурный
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 255,128,244
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Розовый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 255,77,121
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Малиновый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: mdi:circle
+            icon_color: 255,140,179
+            tap_action:
+              action: perform-action
+              perform_action: light.turn_on
+              target:
+                entity_id: light.embi_lampa
+              data:
+                effect: Лиловый
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: template
+            icon: ""
+            content: ""
+            icon_color: ""
+            card_mod:
+              style: |
+                ha-card {
+                  weight: 10%;
+                  --chip-background: transparent !important;
+                  --chip-border-width: 0px;
+                  --chip-height: 10px;
+                }
+        alignment: start
+        card_mod:
+          style: |
+            ha-card {
+              opacity:100%;
+              --chip-border-radius: 50px;
+              --chip-border-width: {{states('input_number.s_card_border_width')|int(0)}}px  !important;
+              --chip-border-color: var(--ha-card-border-color, rgba(var(--rgb-primary-text-color),0.1)) !important;
+              }
+            ha-card:hover {
+               opacity: 100%; }
+            ha-card > .chip-container {
+              flex-wrap: nowrap;
+              overflow-x: scroll;
+              overflow-y: hidden;
+              --chip-spacing: 10px;
+              --chip-height: 45px;
+              --chip-background: rgba(var(--rgb-primary-text-color), 0.05);
+              --chip-font-weight: bolder; 
+              margin-top: 5px;
+              margin-left: -17px;  
+              margin-right: -20px;
+              margin-bottom: 0px; 
+              padding-bottom: 10px;
+              scrollbar-width: none; /* Firefox */
+              -ms-overflow-style: none; /* IE и Edge */    }
+            ha-card > .chip-container > * {
+              flex-shrink: 0;
+            }
       - type: custom:bubble-card
         card_type: separator
         styles: |
@@ -754,7 +1150,7 @@ cards:
                   target:
                     entity_id: light.embi_lampa
                   data:
-                    effect: Лава Лампа
+                    effect: Лава лампа
                 icon_color: "1"
                 double_tap_action:
                   action: none
@@ -780,7 +1176,7 @@ cards:
                   target:
                     entity_id: light.embi_lampa
                   data:
-                    effect: Лава Лампа
+                    effect: Лава лампа
                 icon_color: ""
                 layout: horizontal
                 double_tap_action:
@@ -1426,3 +1822,217 @@ cards:
         entity: "1233"
         state: "12121"
     text_only: true
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: "12"
+            state: "12"
+        card:
+          type: vertical-stack
+          cards:
+            - type: heading
+              icon: mdi:lightbulb
+              heading: Бар
+              heading_style: title
+              card_mod:
+                style: |
+                  ha-card {
+                       background: rgba(100,100,60) !important;
+                     }
+        grid_options:
+          columns: 6
+          rows: auto
+      - type: custom:button-card
+        name: null
+        styles:
+          card:
+            - height: 100px
+            - background: transparent
+            - border: none
+        action: none
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: back
+            card_mod:
+              style: |
+                ha-card:hover {
+                  --chip-background: rgba(var(--rgb-primary-text-color), 0.1);
+                  }
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: light.embi_lampa
+                state: "on"
+            chip:
+              type: template
+              entity: sensor.appletv_app
+              tap_action:
+                action: perform-action
+                perform_action: light.turn_on
+                target:
+                  entity_id: light.embi_lampa
+                data:
+                  effect: Огонь
+              icon: mdi:fire
+              icon_color: "1"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              card_mod:
+                style:
+                  .: |
+                    {% set hover = 'true' %}
+                    {% set stating = 'false' %}
+                    {% include 'chip_settings_style.jinja' %}
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: light.embi_lampa
+                state: "on"
+            chip:
+              type: template
+              tap_action:
+                action: perform-action
+                perform_action: light.turn_on
+                target:
+                  entity_id: light.embi_lampa
+                data:
+                  effect: Лава лампа
+              icon: mdi:lava-lamp
+              icon_color: "1"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              card_mod:
+                style:
+                  .: |
+                    {% set hover = 'true' %}
+                    {% set stating = 'false' %}
+                    {% include 'chip_settings_style.jinja' %}
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: light.embi_lampa
+                state: "on"
+            chip:
+              type: template
+              tap_action:
+                action: perform-action
+                perform_action: light.turn_on
+                target:
+                  entity_id: light.embi_lampa
+                data:
+                  effect: Северное Сияние
+              icon: mdi:blur
+              icon_color: "1"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              card_mod:
+                style:
+                  .: |
+                    {% set hover = 'true' %}
+                    {% set stating = 'false' %}
+                    {% include 'chip_settings_style.jinja' %}
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: light.embi_lampa
+                state: "on"
+            chip:
+              type: template
+              tap_action:
+                action: perform-action
+                perform_action: light.turn_on
+                target:
+                  entity_id: light.embi_lampa
+                data:
+                  effect: Романтика
+              icon: mdi:emoticon-kiss-outline
+              icon_color: "1"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              card_mod:
+                style:
+                  .: |
+                    {% set hover = 'true' %}
+                    {% set stating = 'false' %}
+                    {% include 'chip_settings_style.jinja' %}
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: light.embi_lampa
+                state: "on"
+            chip:
+              type: template
+              tap_action:
+                action: perform-action
+                perform_action: light.turn_on
+                target:
+                  entity_id: light.embi_lampa
+                data:
+                  effect: Радуга
+              icon: mdi:looks
+              icon_color: "1"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              card_mod:
+                style:
+                  .: |
+                    {% set hover = 'true' %}
+                    {% set stating = 'false' %}
+                    {% include 'chip_settings_style.jinja' %}
+          - type: template
+            tap_action:
+              action: navigate
+              navigation_path: "#ambi"
+            icon: mdi:dots-horizontal
+            icon_color: "1"
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style:
+                .: |
+                  {% set hover = 'true' %}
+                  {% set stating = 'false' %}
+                  {% include 'chip_settings_style.jinja' %}
+        alignment: center
+        card_mod:
+          style:
+            mushroom-template-chip:nth-child(1)$: |
+              {% set opacity = 0.3 %}
+              {% include 'shadow_chip_icon.jinja' %}
+            mushroom-template-chip:nth-child(2)$: |
+              {% set opacity = 0.3 %}
+              {% include 'shadow_chip_icon.jinja' %}
+            mushroom-template-chip:nth-child(3)$: |
+              {% set opacity = 0.3 %}
+              {% include 'shadow_chip_icon.jinja' %}
+            mushroom-template-chip:nth-child(4)$: |
+              {% set opacity = 0.3 %}
+              {% include 'shadow_chip_icon.jinja' %}
+            mushroom-template-chip:nth-child(5)$: |
+              {% set opacity = 0.3 %}
+              {% include 'shadow_chip_icon.jinja' %}
+            mushroom-template-chip:nth-child(6)$: |
+              {% set opacity = 0.3 %}
+              {% include 'shadow_chip_icon.jinja' %}
+            .: |
+
+              {% set max_width =150 %}
+              {% set chip_height = 40 %}
+              {% set chip_padding = 5 %}
+              {% set icon_size = 30 %}
+              {% set chip_spacing = 20 %}
+              {% include 'fixed_bottom_bar.jinja' %}
