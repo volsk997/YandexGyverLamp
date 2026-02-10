@@ -30,7 +30,7 @@ cards:
                     {%if is_state(config.entity,'on')%} red
                     {%else %} 1
                     {% endif %}
-            entity: light.embi_lampa
+            entity: input_boolean.embi_lampa_virtualnyi
             tap_action:
               action: toggle
             hold_action:
@@ -157,7 +157,7 @@ cards:
               style: |
                 {% set domain = '' %} 
                 {% set file = '/local/cards_img/ambi.png' %}
-                {% set entity = 'light.embi_lampa' %}
+                {% set entity = 'input_boolean.embi_lampa_virtualnyi' %}
                 {% set state_on = 'on' %}
 
                 {% include 'cover_card_cover.jinja' %}
@@ -165,7 +165,7 @@ cards:
             primary: Эмби-лампа
             secondary: "{{state_translated(config.entity)}}"
             icon: ""
-            entity: light.embi_lampa
+            entity: input_boolean.embi_lampa_virtualnyi
             picture: ""
             badge_icon: ""
             badge_color: ""
@@ -190,7 +190,7 @@ cards:
             chips:
               - type: spacer
               - type: template
-                entity: light.yandex_ambi
+                entity: switch.embi_komanda
                 tap_action:
                   action: toggle
                 hold_action:
@@ -198,9 +198,12 @@ cards:
                 double_tap_action:
                   action: none
                 icon: mdi:power
-                icon_color: |-
-                  {%if is_state('light.embi_lampa','on')%} 255, 150,0
+                icon_color: >-
+                  {%if is_state('input_boolean.embi_lampa_virtualnyi','on')%}
+                  255, 150,0
+
                   {%else %} '1'
+
                   {% endif %}
                 card_mod:
                   style:
@@ -223,25 +226,69 @@ cards:
               style:
                 .: |
                   {% include 'chip_buttons_big.jinja' %}
-          - type: custom:bubble-card
-            card_type: separator
-            styles: |
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 0.1;
-                margin: 40px;
-              }
-            card_mod:
-              style:
-                .: |
-                  ha-card {
-                    margin: {{left|default(0)}}px 150px 0px;
-                  }
-                  @media (max-width: 1150px) {
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: input_boolean.embi_lampa_virtualnyi
+                state: "off"
+            card:
+              type: custom:bubble-card
+              card_type: separator
+              styles: |
+                .bubble-line {
+                  background: var(--primary-text-color);
+                  opacity: 0.1;
+                  margin: 40px;
+                }
+              card_mod:
+                style:
+                  .: |
                     ha-card {
-                      margin: {{left|default(0)}}px {{space|default(0)}}px 0px;
+                      margin: {{left|default(0)}}px 150px 0px;
                     }
-                  }
+                    @media (max-width: 1150px) {
+                      ha-card {
+                        margin: {{left|default(0)}}px {{space|default(0)}}px 0px;
+                      }
+                    }
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: input_boolean.embi_lampa_virtualnyi
+                state: "on"
+            card:
+              type: custom:mushroom-light-card
+              entity: light.embi_lampa
+              show_brightness_control: true
+              primary_info: none
+              secondary_info: none
+              icon_type: none
+              show_color_temp_control: false
+              use_light_color: true
+              card_mod:
+                style:
+                  mushroom-light-brightness-control$: |
+                    mushroom-slider {
+                      --control-height: 25px !important;
+                    }
+                  .: |
+                    ha-card {
+                      background: transparent !important;
+                      opacity: 100%;
+                      margin-top: 0px;
+                      border-width: 0px;
+                      margin: 20px 0px 20px;
+                    }
+
+
+                    @media (pointer: fine) {
+                      ha-card:hover {
+                        background: {{(states('input_text.s_card_background_off_hover')) }};
+                    }
+                    @media (min-width: 1150px) {
+                    ha-card {
+                      margin: 20px {{space|default(150)}}px 20px  ;
+                    }
           - type: custom:mushroom-chips-card
             chips:
               - type: conditional
@@ -459,7 +506,7 @@ cards:
       cards:
         - type: heading
           icon: cil:apple-homepod
-          heading: 0.3.5-a1
+          heading: 0.3.5-a3
           heading_style: title
           card_mod:
             style: |
