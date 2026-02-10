@@ -30,7 +30,7 @@ cards:
                     {%if is_state(config.entity,'on')%} red
                     {%else %} 1
                     {% endif %}
-            entity: input_boolean.embi_lampa_virtualnyi
+            entity: light.embi_lampa
             tap_action:
               action: toggle
             hold_action:
@@ -44,7 +44,7 @@ cards:
                 ha-card:hover {
                   opacity: 1 }     
                 ha-card:active {
-                  scale: 0.8;
+                  scale: 0.9;
                 }  
           - type: spacer
           - type: template
@@ -63,7 +63,7 @@ cards:
                 ha-card:hover {
                   opacity: 1 }     
                 ha-card:active {
-                  scale: 0.8;
+                  scale: 0.9;
                 }  
         alignment: start
         card_mod:
@@ -76,42 +76,8 @@ cards:
       rows: auto
     card_mod:
       style: |
-        ha-card {
-          /* Стили ha-card */
-          position: fixed !important;
-          top: 100px !important;
-          left: calc(50vw + var(--mdc-drawer-width, 0px)/2) !important;
-          transform: translateX(-50%) !important;
-          width: calc(90vw - var(--mdc-drawer-width, 0px)) !important;
-          max-width: 950px !important;
-          min-width: 450px !important;
-          height: calc(100% - 40px) !important;
-          max-height: 60px !important;  /* 30px - отступ от краёв */
-          min-height: 50px !important;  /* Минимальная высота */
-          
-
-
-          height: 100vh !important;
-          z-index: 1 !important;
-          --chip-height: 60px;
-          --chip-spacing: 20px;
-          --chip-background: transparent !important;
-          --chip-icon-size: 35px; 
-          --chip-border-radius: 100px;
-          --chip-padding: 12px;
-          /* Визуальные стили ha-card */
-          background: rgba(0,0,0,0) !important;
-
-
-          padding: 0px 0px !important;
-
-          
-          /* Выравнивание содержимого */
-
-          
-          /* Анимация */
-          transition: all 0.3s ease !important;
-        }
+        {% set top = 100 %}
+        {% include 'fixed_settings.jinja' %}
   - type: conditional
     conditions:
       - condition: state
@@ -157,15 +123,30 @@ cards:
               style: |
                 {% set domain = '' %} 
                 {% set file = '/local/cards_img/ambi.png' %}
-                {% set entity = 'input_boolean.embi_lampa_virtualnyi' %}
+                {% set entity = 'light.embi_lampa' %}
                 {% set state_on = 'on' %}
 
                 {% include 'cover_card_cover.jinja' %}
           - type: custom:mushroom-template-card
             primary: Эмби-лампа
-            secondary: "{{state_translated(config.entity)}}"
+            secondary: >-
+              {% if is_state(config.entity, 'unavailable')%} Недоступно
+
+              {% else %}
+
+              {{state_translated(config.entity)}}
+
+              {% endif %}
+
+
+              {% if is_state(config.entity, 'on')%} •
+              {{state_attr(config.entity, 'effect')}}
+
+              {% else %}
+
+              {% endif %}
             icon: ""
-            entity: input_boolean.embi_lampa_virtualnyi
+            entity: light.embi_lampa
             picture: ""
             badge_icon: ""
             badge_color: ""
@@ -190,7 +171,7 @@ cards:
             chips:
               - type: spacer
               - type: template
-                entity: switch.embi_komanda
+                entity: light.embi_lampa
                 tap_action:
                   action: toggle
                 hold_action:
@@ -198,12 +179,9 @@ cards:
                 double_tap_action:
                   action: none
                 icon: mdi:power
-                icon_color: >-
-                  {%if is_state('input_boolean.embi_lampa_virtualnyi','on')%}
-                  255, 150,0
-
+                icon_color: |-
+                  {%if is_state('light.embi_lampa','on')%} 255, 150,0
                   {%else %} '1'
-
                   {% endif %}
                 card_mod:
                   style:
@@ -229,7 +207,7 @@ cards:
           - type: conditional
             conditions:
               - condition: state
-                entity: input_boolean.embi_lampa_virtualnyi
+                entity: light.embi_lampa
                 state: "off"
             card:
               type: custom:bubble-card
@@ -242,19 +220,27 @@ cards:
                 }
               card_mod:
                 style:
-                  .: |
+                  .: >
                     ha-card {
                       margin: {{left|default(0)}}px 150px 0px;
                     }
+
                     @media (max-width: 1150px) {
                       ha-card {
                         margin: {{left|default(0)}}px {{space|default(0)}}px 0px;
                       }
                     }
+
+                    @media (min-aspect-ratio: 1.8/1) and (max-aspect-ratio: 2/1)
+                    and (max-width: 2000px){
+                      ha-card {
+                      margin: 0px {{space|default(0)}}px 0px  ;
+                      }
+                    }
           - type: conditional
             conditions:
               - condition: state
-                entity: input_boolean.embi_lampa_virtualnyi
+                entity: light.embi_lampa
                 state: "on"
             card:
               type: custom:mushroom-light-card
@@ -271,7 +257,7 @@ cards:
                     mushroom-slider {
                       --control-height: 25px !important;
                     }
-                  .: |
+                  .: >
                     ha-card {
                       background: transparent !important;
                       opacity: 100%;
@@ -281,21 +267,31 @@ cards:
                     }
 
 
+
                     @media (pointer: fine) {
                       ha-card:hover {
                         background: {{(states('input_text.s_card_background_off_hover')) }};
                     }
+
                     @media (min-width: 1150px) {
+
                     ha-card {
                       margin: 20px {{space|default(150)}}px 20px  ;
+                    }
+
+                    @media (min-aspect-ratio: 1.8/1) and (max-aspect-ratio: 2/1)
+                    and (max-width: 2000px){
+                      ha-card {
+                      margin: 20px {{space|default(0)}}px 20px  ;
+                      }
                     }
           - type: custom:mushroom-chips-card
             chips:
               - type: conditional
                 conditions:
                   - condition: state
-                    entity: media_player.gostinaia
-                    state_not: standby1
+                    entity: light.embi_lampa
+                    state: "on"
                 chip:
                   type: template
                   entity: sensor.appletv_app
@@ -321,8 +317,8 @@ cards:
               - type: conditional
                 conditions:
                   - condition: state
-                    entity: media_player.gostinaia
-                    state_not: standby1
+                    entity: light.embi_lampa
+                    state: "on"
                 chip:
                   type: template
                   tap_action:
@@ -347,8 +343,8 @@ cards:
               - type: conditional
                 conditions:
                   - condition: state
-                    entity: media_player.gostinaia
-                    state_not: standby1
+                    entity: light.embi_lampa
+                    state: "on"
                 chip:
                   type: template
                   tap_action:
@@ -373,8 +369,8 @@ cards:
               - type: conditional
                 conditions:
                   - condition: state
-                    entity: media_player.gostinaia
-                    state_not: standby1
+                    entity: light.embi_lampa
+                    state: "on"
                 chip:
                   type: template
                   tap_action:
@@ -399,8 +395,8 @@ cards:
               - type: conditional
                 conditions:
                   - condition: state
-                    entity: media_player.gostinaia
-                    state_not: standby1
+                    entity: light.embi_lampa
+                    state: "on"
                 chip:
                   type: template
                   tap_action:
@@ -476,26 +472,8 @@ cards:
       rows: auto
     card_mod:
       style: |
-        ha-card {
-          /* Стили ha-card */
-          position: fixed !important;
-          top: 160px !important;
-          left: calc(50vw + var(--mdc-drawer-width, 0px)/2) !important;
-          transform: translateX(-50%) !important;
-          width: calc(90vw - var(--mdc-drawer-width, 0px)) !important;
-          max-width: 950px !important;
-          min-width: 450px !important;
-          z-index: 1 !important;
-          /* Визуальные стили ha-card */
-          background: transparent !important;
-
-          
-          /* Выравнивание содержимого */
-
-          
-          /* Анимация */
-          transition: all 0.3s ease !important;
-        }
+        {% set top = 160 %}
+        {% include 'fixed_settings.jinja' %}
   - type: conditional
     conditions:
       - condition: state
@@ -506,7 +484,7 @@ cards:
       cards:
         - type: heading
           icon: cil:apple-homepod
-          heading: 0.3.5-a3
+          heading: 0.3.6
           heading_style: title
           card_mod:
             style: |
@@ -521,7 +499,7 @@ cards:
       - type: custom:bubble-card
         card_type: pop-up
         hash: "#ambi"
-        name: Торшер Дуо
+        name: Эмби Лампа
         icon: hue:bollard
         margin_top_mobile: calc(100vh - 880px)
         margin_top_desktop: calc(100vh - 830px)
@@ -588,66 +566,6 @@ cards:
               - type: custom:mushroom-template-card
                 primary: ""
                 secondary: ""
-                icon: mdi:party-popper
-                badge_icon: ""
-                tap_action:
-                  action: perform-action
-                  perform_action: light.turn_on
-                  target:
-                    entity_id: light.embi_lampa
-                  data:
-                    effect: Вечеринка
-                icon_color: "1"
-                double_tap_action:
-                  action: none
-                badge_color: ""
-                fill_container: true
-                picture: ""
-                hold_action:
-                  action: none
-                layout: horizontal
-                card_mod:
-                  style:
-                    mushroom-shape-icon$: |
-                      {% include 'bubble_card_icon.jinja' %}
-                    .: |
-                      {% include 'mushroom_ha_card_transparent.jinja' %}
-              - type: custom:mushroom-template-card
-                secondary: ""
-                icon: ""
-                badge_icon: ""
-                tap_action:
-                  action: perform-action
-                  perform_action: light.turn_on
-                  target:
-                    entity_id: light.embi_lampa
-                  data:
-                    effect: Вечеринка
-                icon_color: ""
-                layout: horizontal
-                double_tap_action:
-                  action: none
-                badge_color: ""
-                fill_container: true
-                picture: ""
-                hold_action:
-                  action: none
-                primary: Вечеринка
-                card_mod:
-                  style:
-                    mushroom-state-info$: |
-                      {% include 'bubble_card_text.jinja' %}
-                    .: |
-                      {% include 'mushroom_ha_card_transparent.jinja' %}
-            card_mod:
-              style:
-                .: |
-                  {% include 'bubble_card_stack.jinja' %}
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: ""
-                secondary: ""
                 icon: mdi:blur
                 badge_icon: ""
                 tap_action:
@@ -693,126 +611,6 @@ cards:
                 hold_action:
                   action: none
                 primary: Северное Сияние
-                card_mod:
-                  style:
-                    mushroom-state-info$: |
-                      {% include 'bubble_card_text.jinja' %}
-                    .: |
-                      {% include 'mushroom_ha_card_transparent.jinja' %}
-            card_mod:
-              style:
-                .: |
-                  {% include 'bubble_card_stack.jinja' %}
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: ""
-                secondary: ""
-                icon: mdi:equalizer
-                badge_icon: ""
-                tap_action:
-                  action: perform-action
-                  perform_action: light.turn_on
-                  target:
-                    entity_id: light.embi_lampa
-                  data:
-                    effect: Эквалайзер
-                icon_color: "1"
-                double_tap_action:
-                  action: none
-                badge_color: ""
-                fill_container: true
-                picture: ""
-                hold_action:
-                  action: none
-                layout: horizontal
-                card_mod:
-                  style:
-                    mushroom-shape-icon$: |
-                      {% include 'bubble_card_icon.jinja' %}
-                    .: |
-                      {% include 'mushroom_ha_card_transparent.jinja' %}
-              - type: custom:mushroom-template-card
-                secondary: ""
-                icon: ""
-                badge_icon: ""
-                tap_action:
-                  action: perform-action
-                  perform_action: light.turn_on
-                  target:
-                    entity_id: light.embi_lampa
-                  data:
-                    effect: Эквалайзер
-                icon_color: ""
-                layout: horizontal
-                double_tap_action:
-                  action: none
-                badge_color: ""
-                fill_container: true
-                picture: ""
-                hold_action:
-                  action: none
-                primary: Эквалайзер
-                card_mod:
-                  style:
-                    mushroom-state-info$: |
-                      {% include 'bubble_card_text.jinja' %}
-                    .: |
-                      {% include 'mushroom_ha_card_transparent.jinja' %}
-            card_mod:
-              style:
-                .: |
-                  {% include 'bubble_card_stack.jinja' %}
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: ""
-                secondary: ""
-                icon: mdi:gamepad
-                badge_icon: ""
-                tap_action:
-                  action: perform-action
-                  perform_action: light.turn_on
-                  target:
-                    entity_id: light.embi_lampa
-                  data:
-                    effect: Игра
-                icon_color: "1"
-                double_tap_action:
-                  action: none
-                badge_color: ""
-                fill_container: true
-                picture: ""
-                hold_action:
-                  action: none
-                layout: horizontal
-                card_mod:
-                  style:
-                    mushroom-shape-icon$: |
-                      {% include 'bubble_card_icon.jinja' %}
-                    .: |
-                      {% include 'mushroom_ha_card_transparent.jinja' %}
-              - type: custom:mushroom-template-card
-                secondary: ""
-                icon: ""
-                badge_icon: ""
-                tap_action:
-                  action: perform-action
-                  perform_action: light.turn_on
-                  target:
-                    entity_id: light.embi_lampa
-                  data:
-                    effect: Игра
-                icon_color: ""
-                layout: horizontal
-                double_tap_action:
-                  action: none
-                badge_color: ""
-                fill_container: true
-                picture: ""
-                hold_action:
-                  action: none
-                primary: Игра
                 card_mod:
                   style:
                     mushroom-state-info$: |
