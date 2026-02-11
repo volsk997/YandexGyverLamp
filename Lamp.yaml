@@ -329,7 +329,7 @@ cards:
       cards:
         - type: heading
           icon: cil:apple-homepod
-          heading: 0.3.8-2
+          heading: 0.3.8.3
           heading_style: title
           card_mod:
             style: |
@@ -1118,14 +1118,14 @@ cards:
           - type: template
             icon: fas:moon
             icon_color: blue
-            content: Ночник
+            content: Ночь
             tap_action:
               action: perform-action
               perform_action: light.turn_on
               target:
                 entity_id: light.embi_lampa
               data:
-                effect: Ночник
+                effect: Ночь
             hold_action:
               action: none
             double_tap_action:
@@ -1606,23 +1606,3 @@ cards:
               {% set icon_size = 30 %}
               {% set chip_spacing = 20 %}
               {% include 'fixed_bottom_bar.jinja' %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-               
